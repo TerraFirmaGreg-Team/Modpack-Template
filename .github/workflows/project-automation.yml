@@ -2,9 +2,9 @@ name: Move issues by status and priority
 on:
  issues:
   types:
-  - labeled
-  - unlabeled
-  - edited
+    - labeled
+    - unlabeled
+    - edited
 
 jobs:
   move-by-status:
@@ -13,16 +13,16 @@ jobs:
       - name: Determine column
         id: determine-column
         run: |
-          if $GITHUB_EVENT_NAME == 'labeled' ; then
+          if [[ $GITHUB_EVENT_NAME == 'labeled' ]]; then
             case $GITHUB_EVENT_LABEL_NAME in
-              Status: Dropped) echo "::set-output name=column::Dropped";;
-              Status: Confirmed) echo "::set-output name=column::Confirmed";;
-              Status: In Progress) echo "::set-output name=column::In Progress";;
-              Status: Done) echo "::set-output name=column::Done";;
-              *) echo "::set-output name=column::Backlog";;
+              "Status: Dropped") echo "column=Dropped" >> $GITHUB_OUTPUT;;
+              "Status: Confirmed") echo "column=Confirmed" >> $GITHUB_OUTPUT;;
+              "Status: In Progress") echo "column=In Progress" >> $GITHUB_OUTPUT;;
+              "Status: Done") echo "column=Done" >> $GITHUB_OUTPUT;;
+              *) echo "column=Backlog" >> $GITHUB_OUTPUT;;
             esac
           else
-            echo "::set-output name=column::Backlog"
+            echo "column=Backlog" >> $GITHUB_OUTPUT
           fi
 
       - name: Move issue based on status label
@@ -38,17 +38,17 @@ jobs:
       - name: Determine priority column
         id: determine-priority-column
         run: |
-          if $GITHUB_EVENT_NAME == 'labeled' ; then
+          if [[ $GITHUB_EVENT_NAME == 'labeled' ]]; then
             case $GITHUB_EVENT_LABEL_NAME in
-            "Priority: Critical") echo "::set-output name=column::Critical";;
-            "Priority: High") echo "::set-output name=column::High";;
-            "Priority: Long-term plans") echo "::set-output name=column::Long-term Plans";;
-            "Priority: Low") echo "::set-output name=column::Low";;
-            "Priority: Medium") echo "::set-output name=column::Medium";;
-            *) echo "::set-output name=column::"
-            esac
+            "Priority: Critical") echo "column=Critical" >> $GITHUB_OUTPUT;;
+            "Priority: High") echo "column=High" >> $GITHUB_OUTPUT;;
+            "Priority: Long-term plans") echo "column=Long-term Plans" >> $GITHUB_OUTPUT;;
+            "Priority: Low") echo "column=Low" >> $GITHUB_OUTPUT;;
+            "Priority: Medium") echo "column=Medium" >> $GITHUB_OUTPUT;;
+            *) echo "column=" >> $GITHUB_OUTPUT
+          esac
           else
-            echo "::set-output name=column::"
+            echo "column=" >> $GITHUB_OUTPUT
           fi
       - name: Move issue based on priority label
         if: steps.determine-priority-column.outputs.column != ''
