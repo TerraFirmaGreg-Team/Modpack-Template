@@ -28,7 +28,7 @@ jobs:
       - name: Move issue based on status label
         uses: alex-page/github-project-automation-plus@v0.9.0
         with:
-          project: Development Board
+          project: Test
           column: ${{ steps.determine-column.outputs.column }}
           repo-token: ${{ secrets.GITHUB_TOKEN }}
       
@@ -54,6 +54,6 @@ jobs:
         if: steps.determine-priority-column.outputs.column != ''
         uses: alex-page/github-project-automation-plus@v0.9.0
         with:
-          project: Development Board
+          project: Test
           column: ${{ steps.determine-priority-column.outputs.column }}
           repo-token: ${{ secrets.GITHUB_TOKEN }}
