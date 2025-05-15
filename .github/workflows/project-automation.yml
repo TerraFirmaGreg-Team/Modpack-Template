@@ -26,11 +26,11 @@ jobs:
           fi
 
       - name: Move issue based on status label
-        uses: pritishvaidya/github-project-board-automation@0.0.1.9
+        uses: bishalrai96/Project_Card_Automation@master
         with:
-          projects: Test
-          column: ${{ steps.determine-column.outputs.column }}
-          token: ${{ secrets.GITHUB_TOKEN }}
+          label: "Status: In Progress"
+          column: "In Progress"
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
       
   move-by-priority:
     runs-on: ubuntu-latest
@@ -52,8 +52,8 @@ jobs:
           fi
       - name: Move issue based on priority label
         if: steps.determine-priority-column.outputs.column != ''
-        uses: pritishvaidya/github-project-board-automation@0.0.1.9
+        uses: bishalrai96/Project_Card_Automation@master
         with:
-          projects: Test
-          column: ${{ steps.determine-priority-column.outputs.column }}
-          token: ${{ secrets.GITHUB_TOKEN }}
+          label: "Priority: Low"
+          column: "Low"
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
