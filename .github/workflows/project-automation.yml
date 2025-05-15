@@ -40,15 +40,15 @@ jobs:
         run: |
           if $GITHUB_EVENT_NAME == 'labeled' ; then
             case $GITHUB_EVENT_LABEL_NAME in
-              Priority: Critical) echo "::set-output name=column::Critical";;
-              Priority: High) echo "::set-output name=column::High";;
-              Priority: Long-term plans) echo "::set-output name=column::Long-term Plans";;
-              Priority: Low) echo "::set-output name=column::Low";;
-              Priority: Medium) echo "::set-output name=column::Medium";;
-              *) echo "::set-output name=column::";;
+            "Priority: Critical") echo "::set-output name=column::Critical";;
+            "Priority: High") echo "::set-output name=column::High";;
+            "Priority: Long-term plans") echo "::set-output name=column::Long-term Plans";;
+            "Priority: Low") echo "::set-output name=column::Low";;
+            "Priority: Medium") echo "::set-output name=column::Medium";;
+            *) echo "::set-output name=column::"
             esac
           else
-            echo "::set-output name=column::Normal"
+            echo "::set-output name=column::"
           fi
       - name: Move issue based on priority label
         if: steps.determine-priority-column.outputs.column != ''
