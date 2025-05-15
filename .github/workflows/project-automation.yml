@@ -1,0 +1,59 @@
+name: Move issues by status and priority
+on:
+ issues:
+  types:
+  - labeled
+  - unlabeled
+  - edited
+
+jobs:
+  move-by-status:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Determine column
+        id: determine-column
+        run: |
+          if $GITHUB_EVENT_NAME == 'labeled' ; then
+            case $GITHUB_EVENT_LABEL_NAME in
+              Status: Dropped) echo "::set-output name=column::Dropped";;
+              Status: Confirmed) echo "::set-output name=column::Confirmed";;
+              Status: In Progress) echo "::set-output name=column::In Progress";;
+              Status: Done) echo "::set-output name=column::Done";;
+              *) echo "::set-output name=column::Backlog";;
+            esac
+          else
+            echo "::set-output name=column::Backlog"
+          fi
+
+      - name: Move issue based on status label
+        uses: alex-page/github-project-automation-plus@v0.9.0
+        with:
+          project: Development Board
+          column: ${{ steps.determine-column.outputs.column }}
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+      
+  move-by-priority:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Determine priority column
+        id: determine-priority-column
+        run: |
+          if $GITHUB_EVENT_NAME == 'labeled' ; then
+            case $GITHUB_EVENT_LABEL_NAME in
+              Priority: Critical) echo "::set-output name=column::Critical";;
+              Priority: High) echo "::set-output name=column::High";;
+              Priority: Long-term plans) echo "::set-output name=column::Long-term Plans";;
+              Priority: Low) echo "::set-output name=column::Low";;
+              Priority: Medium) echo "::set-output name=column::Medium";;
+              *) echo "::set-output name=column::";;
+            esac
+          else
+            echo "::set-output name=column::Normal"
+          fi
+      - name: Move issue based on priority label
+        if: steps.determine-priority-column.outputs.column != ''
+        uses: alex-page/github-project-automation-plus@v0.9.0
+        with:
+          project: Development Board
+          column: ${{ steps.determine-priority-column.outputs.column }}
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
