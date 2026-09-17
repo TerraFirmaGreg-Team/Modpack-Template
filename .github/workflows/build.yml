@@ -328,7 +328,6 @@ jobs:
 
           github-tag: ${{ needs.info.outputs.project_version }}
           github-generate-changelog: true
-          github-repository: owner/non-existent-repo
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
           files: |
