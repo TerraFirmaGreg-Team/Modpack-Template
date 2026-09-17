@@ -1,0 +1,15 @@
+{
+    "name": "Modpack-Template",
+    "version": "DEV",
+    "release_type": "alpha",
+    "description": "Minimal test modpack template for game-publish CI.",
+    "author": "TerraFirmaGreg-Team",
+    "overrides": [
+        "config",
+        "defaultconfigs",
+        "kubejs"
+    ],
+    "server_overrides": [],
+    "client_overrides": [],
+    "projects": {}
+}

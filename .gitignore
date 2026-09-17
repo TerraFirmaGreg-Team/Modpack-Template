@@ -1,0 +1,20 @@
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+
+# OS
+*.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Pakku
+build/
+mods/
+.pakku/cache/
+
+

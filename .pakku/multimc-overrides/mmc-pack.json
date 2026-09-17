@@ -1,0 +1,6 @@
+{
+  "components": [
+    {"uid": "net.minecraft", "version": "MINECRAFT_VERSION"},
+    {"uid": "net.minecraftforge", "version": "LOADER_VERSION"}
+  ]
+}
