@@ -7,10 +7,10 @@ on:
       - dev
       - main
     paths:
-      - '.pakku'
-      - 'config'
-      - 'defaultconfigs'
-      - 'kubejs'
+      - '.pakku/'
+      - 'config/'
+      - 'defaultconfigs/'
+      - 'kubejs/'
       - 'CHANGELOG.md'
       - 'pakku-lock.json'
       - 'pakku.json'
