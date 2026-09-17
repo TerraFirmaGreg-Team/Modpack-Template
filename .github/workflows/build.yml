@@ -201,6 +201,8 @@ jobs:
       - name: Export Modpack
         run: |
           java -jar pakku.jar fetch
+
+          mkdir -p mods
           java -jar pakku.jar export
 
           mkdir -p .pakku/multimc-overrides/flame
