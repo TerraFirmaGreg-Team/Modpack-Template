@@ -1,8 +1,8 @@
 {
     "name": "Modpack-Template",
     "version": "DEV",
-    "release_type": "alpha",
-    "description": "Minimal test modpack template for game-publish CI.",
+    "release_type": "release",
+    "description": "Modpack template",
     "author": "TerraFirmaGreg-Team",
     "overrides": [
         "config",
